@@ -1,0 +1,31 @@
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n=len(nums)
+        j=n-1
+        while j>0:
+            if nums[j]>nums[j-1]:
+                break
+            j-=1
+        if j==0:
+            return nums.sort()
+        i=j-1
+        j=n-1
+        while j>i:
+            if nums[j]>nums[i]:
+                break
+            j-=1
+        nums[i],nums[j]=nums[j],nums[i]
+        l=nums[i+1:]
+        l.sort()
+        p=0
+        for k in range(i+1,n):
+            nums[k]=l[p]
+            p+=1
+    """
+    1. From right to left find the one with misorer match that is the one that not in ascending order.
+    2.Swap the element with next greatest element from its rigth sub array.
+    3.the reverse the right sub arrray (but here it is already reversed).
+    """
